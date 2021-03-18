@@ -1,5 +1,7 @@
+import 'package:demo_app/provider/calculadora.dart';
 import 'package:demo_app/widgets/converter.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyHome extends StatelessWidget {
   @override
@@ -12,8 +14,13 @@ class MyHome extends StatelessWidget {
         ),
         home: Scaffold(
             appBar: AppBar(
-              title: Text('Binary to decimal converter'),
+              title: Text('Binary and decimal converter'),
             ),
-            body: Center(child: Converter())));
+            body: ChangeNotifierProvider(
+              create: (context) => Calculadora(),
+              child: Center(child: Converter(),),
+              )
+            )
+            );
   }
 }

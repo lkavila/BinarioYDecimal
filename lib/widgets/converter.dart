@@ -1,4 +1,8 @@
+import 'package:demo_app/provider/calculadora.dart';
+import 'package:demo_app/widgets/binary.dart';
+import 'package:demo_app/widgets/decimal.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Converter extends StatefulWidget {
   @override
@@ -34,6 +38,9 @@ class _ConverterState extends State<Converter> {
 
   @override
   Widget build(BuildContext context) {
+
+    final provider = Provider.of<Calculadora>(context);
+
     return Container(
      child: 
         Column(
@@ -41,17 +48,22 @@ class _ConverterState extends State<Converter> {
           children: <Widget>[
             Container(
                alignment: Alignment.centerLeft,
-              child: Text("Binary -> Decimal")
+              child: Builder(
+                builder: (context) {
+                  if (provider.isBinary){
+                    return TextButton(onPressed: (){provider.isBinary=false;}, child: Text("Binary -> Decimal"));
+                  }else return TextButton(onPressed: (){provider.isBinary=true;}, child: Text("Decimal -> Binary"));
+                },)
               ),
         Container(
               padding: const EdgeInsets.all(8.0),
               alignment: Alignment.centerRight,
-              child: inputText(_binary)
+              child: inputText(provider.binary)
               ),
               Container(
                 padding: const EdgeInsets.all(8.0),
                 alignment: Alignment.centerRight,
-                child: Text("$_decimal",
+                child: Text("${provider.decimal}",
                 textAlign: TextAlign.right,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -59,57 +71,26 @@ class _ConverterState extends State<Converter> {
                     fontSize: 25),
               ),
               ),
-
-
-
-            Expanded(
-              flex: 3,
-              child: Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      MaterialButton(
-                          height: 400,
-                          minWidth: 120,
-                          child: Text("1", style: TextStyle(color: Colors.white, fontSize: 20)),
-                          color: Colors.blue,
-                          onPressed: () {_onPressed("1");},
-                        ),
-                      
-                      MaterialButton(
-                        height: 400,
-                        minWidth: 120,
-                        child: Text("0", style: TextStyle(color: Colors.white, fontSize: 20)),
-                        color: Colors.blue,
-                        onPressed: () {_onPressed("0");},
-                      ),
-                    ]
-                    ),
-            ),
-            ),
-
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              child: MaterialButton(
-                  color: Color(int.parse("#0069C0".replaceAll('#', '0xff'))),
-                  onPressed: () {
-                   _onReset();
-                  },
-                  child: Text("Reset",
-                      style: new TextStyle(
-                        fontSize: 15.0,
-                        color: Colors.white,
-                      ))),
-            ),
-          ),
+              Expanded(
+                child:
+                Builder(builder: (context) {
+                  
+                  if (provider.isBinary){
+                    return Binary(provider);
+                  }else{
+                    return Decimal();
+                  }
+                },),
+                ),
+              
           ]),
 
 
     );
   }
+
+
+
 }
 
 Widget inputText(_binary){
@@ -128,3 +109,4 @@ Widget inputText(_binary){
                     fontSize: 35),);  
   }          
 }
+
