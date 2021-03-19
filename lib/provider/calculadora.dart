@@ -12,42 +12,19 @@ class Calculadora extends ChangeNotifier{
     notifyListeners();
   }
 
-  String get binary{
-     if (isBinary){
-        return this._binary;
-     }else{
-      if (_decimal==""){
-        return "0";
-      }else return decToBin();
-     }
-  }
+  String get binary => this._binary; 
+  
   set binary(String value){ 
     this._binary = value;
+    this._decimal = int.parse(_binary, radix: 2).toRadixString(10);
     notifyListeners();
    }
 
-  String get decimal {
-    if (isBinary){
-      if (_binary==""){
-        return "0";
-      }else return binToDec();
-    }else return this._decimal;
-  }
+  String get decimal => this._decimal;
 
   set decimal( String value) {
     this._decimal = value;
+    this._binary = int.parse(_decimal, radix: 10).toRadixString(2);
     notifyListeners();
   }
-
-  binToDec(){
-    this._decimal = int.parse(_binary, radix: 2).toRadixString(10);
-    return this._decimal;
-  }
-
-  decToBin(){
-    this._binary = int.parse(_decimal, radix: 10).toRadixString(2);
-    return this._binary;
-  }
-
-
 } 

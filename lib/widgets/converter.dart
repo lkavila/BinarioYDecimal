@@ -38,17 +38,10 @@ class _ConverterState extends State<Converter> {
               Container(
                 padding: const EdgeInsets.all(8.0),
                 alignment: Alignment.centerRight,
-                child: Text("${provider.decimal}",
-                textAlign: TextAlign.right,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red[400],
-                    fontSize: 25),
-              ),
+                child: inputText(provider.decimal)
               ),
               Expanded(
-                child:
-                Builder(builder: (context) {
+                child: Builder(builder: (context) {
                   
                   if (provider.isBinary){
                     return Binary(provider);
@@ -68,20 +61,23 @@ class _ConverterState extends State<Converter> {
 
 }
 
-Widget inputText(_binary){
-  if(_binary!=null){
-      return Text(
-                '$_binary',
+Widget inputText(String _num){
+  
+    return Text('${quitarCeros(_num)}',
                 textAlign: TextAlign.right,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color(int.parse("#FF5722".replaceAll('#', '0xff'))),
-                    fontSize: 35),
-              );
-  }else{
-      return Text('',style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35),);  
-  }          
+                    color: Colors.red,
+                    fontSize: 30),
+    );
+  }
+
+
+String quitarCeros(String _num){
+  
+  while (_num.startsWith("0") && _num.length>1){
+    _num = _num.substring(1);
+  }
+  return _num;
 }
 
