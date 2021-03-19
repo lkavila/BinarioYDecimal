@@ -32,7 +32,7 @@ Widget binary(BuildContext context, Calculadora _provider){
                       MaterialButton(
                           height: 400,
                           minWidth: 120,
-                          child: Text("1", style: TextStyle(color: Colors.white, fontSize: 20)),
+                          child: Text("1", style: TextStyle(color: Colors.white, fontSize: 25)),
                           color: Colors.blue,
                           onPressed: () {_provider.binary+="1";},
                         ),
@@ -40,7 +40,7 @@ Widget binary(BuildContext context, Calculadora _provider){
                       MaterialButton(
                         height: 400,
                         minWidth: 120,
-                        child: Text("0", style: TextStyle(color: Colors.white, fontSize: 20)),
+                        child: Text("0", style: TextStyle(color: Colors.white, fontSize: 25)),
                         color: Colors.blue,
                         onPressed: () {_provider.binary+="0";},
                       ),
@@ -54,14 +54,16 @@ Widget binary(BuildContext context, Calculadora _provider){
             child: Container(
               padding: const EdgeInsets.all(8.0),
               child: MaterialButton(
-                  color: Color(int.parse("#0069C0".replaceAll('#', '0xff'))),
+                  color: Colors.blue[900],
+                  splashColor: Colors.lightBlue[400],
+                  shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                   onPressed: () {
                    _provider.binary="0";
                    _provider.decimal="0";
                   },
                   child: Text("Reset",
                       style: new TextStyle(
-                        fontSize: 15.0,
+                        fontSize: 20.0,
                         color: Colors.white,
                       ))),
             ),

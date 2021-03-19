@@ -14,7 +14,7 @@ class MyHome extends StatelessWidget {
         ),
         home: Scaffold(
             appBar: AppBar(
-              title: Text('Binary and decimal converter'),
+              title: Text('Converter with state'),
             ),
             body: ChangeNotifierProvider(
               create: (context) => Calculadora(),

@@ -11,73 +11,87 @@ class Decimal extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          Row(
+          Expanded(flex: 1, child: Row(
             children: [
               boton("1"),
               boton("2"),
               boton("3"),
-
             ],
-            
           ),
-          Spacer(),
-          Row(
+          ),
+          Expanded(flex: 1, child: Row(
             children: [
               boton("4"),
               boton("5"),
               boton("6"),
-
             ],
-            
-          ),
-          Spacer(),
-          Row(
+          ),),
+          Expanded(flex: 1, child: Row(
             children: [
               boton("7"),
               boton("8"),
               boton("9"),
-
             ],
-            
-          ),
-          Spacer(),
-          Row(
+          ),),
+          Expanded(flex: 1, 
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              MaterialButton(
+                Expanded(
+                  flex: 2,
+            child: Container(
+              padding: const EdgeInsets.all(5.0),
+              alignment: Alignment.center,
+              child: MaterialButton(
                   color: Colors.blue[900],
+                  minWidth: 200.0,
+                  height: 90.0,
+                  elevation: 10.0,
+                  splashColor: Colors.lightBlue[400],
+                  shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
                   onPressed: () {
                    _provider.binary="0";
                    _provider.decimal="0";
                   },
                   child: Text("Reset",
                       style: new TextStyle(
-                        fontSize: 15.0,
+                        fontSize: 20.0,
                         color: Colors.white,
                       ))),
-              boton("0"),
-
+              
+              
+                ),
+              ),
+            boton("0"),
             ],
             
+          ),
           ),
         ]
       ),
     );
   }
 
-  Widget boton(String num){
+  Widget boton(String _num){
 
-  return Container(
-    padding: const EdgeInsets.all(2.0),
-    color: Colors.amber[400],
-    alignment: Alignment.center,
-    child: ElevatedButton(
+  return 
+  Expanded(
+    child: Container(
+      padding: const EdgeInsets.all(5.0),
+      alignment: Alignment.center,
+      child: ElevatedButton(
 
-      child: Text(num),
-      style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.teal[400])),
-      onPressed: () {
-        _provider.decimal+=num;
-      },
-      ),
+          child: Text(_num, style: TextStyle(fontSize: 25),),
+          style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.teal[400])
+          , minimumSize: MaterialStateProperty.resolveWith((states) => Size(90, 90))
+          , elevation: MaterialStateProperty.resolveWith((states) => 7.0)
+          , overlayColor: MaterialStateProperty.resolveWith((states) => Colors.tealAccent[700])),
+          onPressed: () {
+            _provider.decimal+=_num;
+          },
+        ),
+  )
   );
 
 }

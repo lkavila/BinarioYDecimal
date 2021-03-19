@@ -35,12 +35,17 @@ class _ConverterState extends State<Converter> {
               alignment: Alignment.centerRight,
               child: inputText(provider.binary)
               ),
-              Container(
+        SizedBox(
+          height: 0.2,
+          width: 10.0,
+          child: ColoredBox(color: Colors.blueGrey,) 
+        ),
+        Container(
                 padding: const EdgeInsets.all(8.0),
                 alignment: Alignment.centerRight,
                 child: inputText(provider.decimal)
               ),
-              Expanded(
+        Expanded(
                 child: Builder(builder: (context) {
                   
                   if (provider.isBinary){

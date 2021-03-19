@@ -13,7 +13,6 @@ class Calculadora extends ChangeNotifier{
   }
 
   String get binary => this._binary; 
-  
   set binary(String value){ 
     this._binary = value;
     this._decimal = int.parse(_binary, radix: 2).toRadixString(10);
@@ -21,7 +20,6 @@ class Calculadora extends ChangeNotifier{
    }
 
   String get decimal => this._decimal;
-
   set decimal( String value) {
     this._decimal = value;
     this._binary = int.parse(_decimal, radix: 10).toRadixString(2);
