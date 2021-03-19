@@ -1,8 +1,10 @@
+import 'package:demo_app/provider/calculadora.dart';
 import 'package:flutter/material.dart';
 
 
 class Decimal extends StatelessWidget {
-  const Decimal({Key key}) : super(key: key);
+  final Calculadora _provider;
+  const Decimal(this._provider, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,17 @@ class Decimal extends StatelessWidget {
           Spacer(),
           Row(
             children: [
-              boton("Reset"),
+              MaterialButton(
+                  color: Color(int.parse("#0069C0".replaceAll('#', '0xff'))),
+                  onPressed: () {
+                   _provider.binary="";
+                   _provider.decimal="";
+                  },
+                  child: Text("Reset",
+                      style: new TextStyle(
+                        fontSize: 15.0,
+                        color: Colors.white,
+                      ))),
               boton("0"),
 
             ],
@@ -51,9 +63,8 @@ class Decimal extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget boton(String num){
+  Widget boton(String num){
 
   return Container(
     padding: const EdgeInsets.all(8.0),
@@ -61,9 +72,11 @@ Widget boton(String num){
     child: ElevatedButton(
       child: Text(num),
       onPressed: () {
-        
+        _provider.decimal+=num;
       },
       ),
   );
 
 }
+}
+

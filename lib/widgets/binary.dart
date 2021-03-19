@@ -57,6 +57,7 @@ Widget binary(BuildContext context, Calculadora _provider){
                   color: Color(int.parse("#0069C0".replaceAll('#', '0xff'))),
                   onPressed: () {
                    _provider.binary="";
+                   _provider.decimal="";
                   },
                   child: Text("Reset",
                       style: new TextStyle(

@@ -10,31 +10,6 @@ class Converter extends StatefulWidget {
 }
 
 class _ConverterState extends State<Converter> {
-  String _binary;
-  String _decimal = "0"; // _decimal = int.parse(_binary, radix: 2).toRadixString(10);
-
-  void _onPressed(String _num) {
-
-    String _bin;
-    if(_binary!=null){
-      _bin = _binary + _num;
-    }else{_bin = _num;}
-
-    String _dec = int.parse(_bin, radix: 2).toRadixString(10);
-
-    setState(() {
-      _binary = _bin;
-      _decimal = _dec;
-    });
-  }
-
-  void _onReset(){
-    setState(() {
-      _binary = null;
-      _decimal = "0";
-    });
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +53,7 @@ class _ConverterState extends State<Converter> {
                   if (provider.isBinary){
                     return Binary(provider);
                   }else{
-                    return Decimal();
+                    return Decimal(provider);
                   }
                 },),
                 ),
